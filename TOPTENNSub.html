@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookbook</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            font-size: 16px;
+        }
+        .flex {
+            display: flex;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .space-x-4 {
+            gap: 10px;
+        }
+        .p-4 {
+            padding: 10px;
+        }
+        .border-b {
+            border-bottom: 1px solid black;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        .text-xl {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .nav-link {
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid black;
+        }
+        .view-items-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 16px;
+            border-radius: 0.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .view-items-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .relative, .absolute {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .my-4 {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        .favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .favorite-icon img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="flex justify-between items-center p-4 border-b">
+        <div class="flex items-center space-x-4">
+            <img src="img/TOPTENlogo.jpg" alt="Logo" class="h-10">
+            <h1 class="text-2xl font-bold">Lookbook</h1>
+        </div>
+        <div class="dropdown">
+            <button class="text-lg season-button">S/S</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="initSeason('ss')">S/S</a>
+                <a href="#" onclick="initSeason('fw')">F/W</a>
+                <a href="#" onclick="initSeason('best')">Best Item</a>
+                <a href="#" onclick="showFavorites()">Favorites</a>
+            </div>
+        </div>
+    </header>
+    <main class="p-4">
+        <nav class="flex justify-center space-x-8 my-4" id="category-nav">
+            <div class="nav-link text-lg hidden" id="all-link" onclick="showImages('all', currentSeason)">ALL</div>
+            <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
+            <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
+        </nav>
+        <section id="image-container" class="grid grid-cols-4 gap-4"></section>
+    </main>
+    <script>
+        let currentSeason = 'ss';
+        let favorites = [];
+
+        const images = {
+            'ss': {
+                'Best Item': [],
+
+                'women': ['TOPTENLookBookSS/39.jpg','TOPTENLookBookSS/40.jpg','TOPTENLookBookSS/41.jpg','TOPTENLookBookSS/42.jpg','TOPTENLookBookSS/45.jpg','TOPTENLookBookSS/46.jpg','TOPTENLookBookSS/47.jpg','TOPTENLookBookSS/48.jpg',
+                'TOPTENLookBookSS/49.jpg','TOPTENLookBookSS/50.jpg','TOPTENLookBookSS/51.jpg','TOPTENLookBookSS/52.jpg','TOPTENLookBookSS/53.jpg','TOPTENLookBookSS/54.jpg','TOPTENLookBookSS/55.jpg','TOPTENLookBookSS/56.jpg','TOPTENLookBookSS/57.jpg','TOPTENLookBookSS/58.jpg',
+                'TOPTENLookBookSS/59.jpg','TOPTENLookBookSS/60.jpg','TOPTENLookBookSS/61.jpg','TOPTENLookBookSS/62.jpg','TOPTENLookBookSS/63.jpg','TOPTENLookBookSS/64.jpg','TOPTENLookBookSS/65.jpg','TOPTENLookBookSS/66.jpg','TOPTENLookBookSS/67.jpg','TOPTENLookBookSS/68.jpg',
+                'TOPTENLookBookSS/69.jpg','TOPTENLookBookSS/70.jpg','TOPTENLookBookSS/71.jpg',
+                ],
+
+                'men': ['TOPTENLookBookSS/1.jpg','TOPTENLookBookSS/2.jpg','TOPTENLookBookSS/3.jpg','TOPTENLookBookSS/4.jpg','TOPTENLookBookSS/5.jpg','TOPTENLookBookSS/6.jpg','TOPTENLookBookSS/7.jpg','TOPTENLookBookSS/8.jpg','TOPTENLookBookSS/9.jpg','TOPTENLookBookSS/10.jpg','TOPTENLookBookSS/11.jpg','TOPTENLookBookSS/12.jpg','TOPTENLookBookSS/13.jpg','TOPTENLookBookSS/14.jpg','TOPTENLookBookSS/15.jpg',
+                'TOPTENLookBookSS/16.jpg','TOPTENLookBookSS/17.jpg','TOPTENLookBookSS/18.jpg','TOPTENLookBookSS/19.jpg','TOPTENLookBookSS/20.jpg','TOPTENLookBookSS/21.jpg','TOPTENLookBookSS/22.jpg','TOPTENLookBookSS/23.jpg','TOPTENLookBookSS/24.jpg','TOPTENLookBookSS/25.jpg','TOPTENLookBookSS/26.jpg','TOPTENLookBookSS/27.jpg','TOPTENLookBookSS/28.jpg','TOPTENLookBookSS/29.jpg','TOPTENLookBookSS/30.jpg','TOPTENLookBookSS/31.jpg',
+                'TOPTENLookBookSS/32.jpg','TOPTENLookBookSS/33.jpg','TOPTENLookBookSS/34.jpg','TOPTENLookBookSS/35.jpg','TOPTENLookBookSS/36.jpg','TOPTENLookBookSS/37.jpg','TOPTENLookBookSS/38.jpg',
+                ]
+            },
+            'fw': {
+                'all': ['image/TOPTENFWMen1.jpg', 'image/TOPTENFWMen2.jpg', 'image/TOPTENFWMen3.jpg', 'image/TOPTENFWMen4.jpg', 'image/TOPTENFWMen5.jpg', 'image/TOPTENFWMen6.jpg', 'image/TOPTENFWMen7.jpg', 'image/TOPTENFWMen8.jpg', 'image/TOPTENFWMen9.jpg', 'image/TOPTENFWMen10.jpg', 'image/TOPTENFWMen11.jpg', 'image/TOPTENFWMen12.jpg', 'image/TOPTENFWMen13.jpg', 'image/TOPTENFWMen14.jpg', 'image/TOPTENFWMen15.jpg', 'image/TOPTENFWMen16.jpg', 'image/TOPTENFWMen17.jpg', 'image/TOPTENFWMen18.jpg', 'image/TOPTENFWMen19.jpg', 'image/TOPTENFWMen20.jpg', 'image/TOPTENFWMen21.jpg', 'image/TOPTENFWMen22.jpg', 'image/TOPTENFWMen23.jpg', 'image/TOPTENFWMen24.jpg', 'image/TOPTENFWMen25.jpg', 'image/TOPTENFWMen26.jpg', 'image/TOPTENFWMen27.jpg', 'image/TOPTENFWMen28.jpg', 'image/TOPTENFWMen29.jpg', 'image/TOPTENFWMen30.jpg', 'image/TOPTENFWMen31.jpg', 'image/TOPTENFWMen32.jpg', 'image/TOPTENFWMen33.jpg', 'image/TOPTENFWMen34.jpg'],
+                'women': ['TOPTENLookBookFW/108.jpg','TOPTENLookBookFW/109.jpg','TOPTENLookBookFW/110.jpg','TOPTENLookBookFW/111.jpg','TOPTENLookBookFW/112.jpg','TOPTENLookBookFW/113.jpg','TOPTENLookBookFW/114.jpg','TOPTENLookBookFW/115.jpg','TOPTENLookBookFW/116.jpg','TOPTENLookBookFW/117.jpg','TOPTENLookBookFW/118.jpg','TOPTENLookBookFW/119.jpg','TOPTENLookBookFW/120.jpg','TOPTENLookBookFW/121.jpg',
+                'TOPTENLookBookFW/122.jpg','TOPTENLookBookFW/123.jpg','TOPTENLookBookFW/124.jpg','TOPTENLookBookFW/125.jpg','TOPTENLookBookFW/126.jpg','TOPTENLookBookFW/127.jpg','TOPTENLookBookFW/128.jpg','TOPTENLookBookFW/129.jpg','TOPTENLookBookFW/130.jpg','TOPTENLookBookFW/131.jpg','TOPTENLookBookFW/132.jpg','TOPTENLookBookFW/133.jpg','TOPTENLookBookFW/134.jpg','TOPTENLookBookFW/135.jpg','TOPTENLookBookFW/136.jpg',
+                'TOPTENLookBookFW/137.jpg','TOPTENLookBookFW/138.jpg','TOPTENLookBookFW/139.jpg','TOPTENLookBookFW/140.jpg',
+                ],
+
+                'men': [  'TOPTENLookBookFW/72.jpg','TOPTENLookBookFW/73.jpg','TOPTENLookBookFW/74.jpg','TOPTENLookBookFW/75.jpg','TOPTENLookBookFW/76.jpg','TOPTENLookBookFW/77.jpg','TOPTENLookBookFW/78.jpg','TOPTENLookBookFW/79.jpg','TOPTENLookBookFW/80.jpg','TOPTENLookBookFW/81.jpg','TOPTENLookBookFW/82.jpg','TOPTENLookBookFW/83.jpg','TOPTENLookBookFW/84.jpg','TOPTENLookBookFW/85.jpg','TOPTENLookBookFW/86.jpg','TOPTENLookBookFW/87.jpg','TOPTENLookBookFW/88.jpg',
+                'TOPTENLookBookFW/89.jpg','TOPTENLookBookFW/90.jpg','TOPTENLookBookFW/91.jpg','TOPTENLookBookFW/92.jpg','TOPTENLookBookFW/93.jpg','TOPTENLookBookFW/94.jpg','TOPTENLookBookFW/95.jpg','TOPTENLookBookFW/96.jpg','TOPTENLookBookFW/97.jpg','TOPTENLookBookFW/98.jpg','TOPTENLookBookFW/99.jpg','TOPTENLookBookFW/100.jpg','TOPTENLookBookFW/101.jpg','TOPTENLookBookFW/102.jpg','TOPTENLookBookFW/103.jpg','TOPTENLookBookFW/104.jpg','TOPTENLookBookFW/105.jpg','TOPTENLookBookFW/106.jpg',
+                'TOPTENLookBookFW/107.jpg', ]
+            },
+            'best': {
+                'women': ['TOPTENBestItem/141.jpg', 'TOPTENBestItem/142.jpg', 'TOPTENBestItem/143.jpg', 'TOPTENBestItem/144.jpg']
+            }
+        };
+
+        function initSeason(season) {
+            currentSeason = season;
+            const seasonTitle = document.querySelector('.season-button');
+            seasonTitle.textContent = season.toUpperCase();
+            const nav = document.getElementById('category-nav');
+            const womenLink = document.getElementById('women-link');
+            const menLink = document.getElementById('men-link');
+            nav.classList.remove('hidden');
+            if (season === 'best') {
+                womenLink.classList.add('hidden');
+                menLink.classList.add('hidden');
+            } else {
+                womenLink.classList.remove('hidden');
+                menLink.classList.remove('hidden');
+            }
+            showImages('women', season);
+        }
+
+        function showImages(category, season) {
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            images[season][category].forEach(imgSrc => {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.position = 'relative';
+
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `${season} ${category} style`;
+                img.onclick = () => toggleFavorite(img, imgSrc);
+
+                const favoriteIcon = document.createElement('div');
+                favoriteIcon.classList.add('favorite-icon');
+                favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(favoriteIcon);
+                container.appendChild(imgContainer);
+            });
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector(`[onclick="showImages('${category}', '${season}')"]`).classList.add('active');
+        }
+
+        function toggleFavorite(img, imgSrc) {
+            const index = favorites.indexOf(imgSrc);
+            if (index === -1) {
+                favorites.push(imgSrc);
+                img.nextElementSibling.innerHTML = '❤️';
+            } else {
+                favorites.splice(index, 1);
+                img.nextElementSibling.innerHTML = '🤍';
+            }
+        }
+
+        function showFavorites() {
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            favorites.forEach(imgSrc => {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.position = 'relative';
+
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = 'Favorite style';
+                
+                const favoriteIcon = document.createElement('div');
+                favoriteIcon.classList.add('favorite-icon');
+                favoriteIcon.innerHTML = '❤️';
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(favoriteIcon);
+                container.appendChild(imgContainer);
+            });
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        }
+
+        // Initial load
+        window.onload = () => initSeason(currentSeason);
+    </script>
+</body>
+</html>
