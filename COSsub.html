@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookbook</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            font-size: 16px;
+        }
+        .flex {
+            display: flex;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .space-x-4 {
+            gap: 10px;
+        }
+        .p-4 {
+            padding: 10px;
+        }
+        .border-b {
+            border-bottom: 1px solid black;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        .text-xl {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .nav-link {
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid black;
+        }
+        .view-items-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 16px;
+            border-radius: 0.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .view-items-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .relative, .absolute {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .my-4 {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        .favorite-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header class="flex justify-between items-center p-4 border-b">
+        <div class="flex items-center space-x-4">
+            <img src="image/COSlogo.png" alt="Logo" class="h-10">
+            <h1 class="text-2xl font-bold">Lookbook</h1>
+        </div>
+        <div class="dropdown">
+            <button class="text-lg season-button">S/S</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="initSeason('ss')">S/S</a>
+                <a href="#" onclick="initSeason('fw')">F/W</a>
+                <a href="#" onclick="initSeason('best')">Best Item</a>
+                <a href="#" onclick="showFavorites()">Favorites</a>
+            </div>
+        </div>
+    </header>
+    <main class="p-4">
+        <nav class="flex justify-center space-x-8 my-4" id="category-nav">
+            <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
+            <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
+        </nav>
+        <section id="image-container" class="grid grid-cols-4 gap-4">
+        </section>
+    </main>
+    <script>
+        let currentSeason = 'ss'; 
+        let favorites = [];
+
+        const images = {
+            'ss': {
+                'women': ['COSLookBookSS/172.jpg','COSLookBookSS/173.jpg','COSLookBookSS/174.jpg','COSLookBookSS/175.jpg','COSLookBookSS/176.jpg','COSLookBookSS/177.jpg',
+                'COSLookBookSS/178.jpg','COSLookBookSS/179.jpg','COSLookBookSS/180.jpg','COSLookBookSS/181.jpg','COSLookBookSS/182.jpg','COSLookBookSS/183.jpg','COSLookBookSS/184.jpg',
+                'COSLookBookSS/185.jpg','COSLookBookSS/186.jpg','COSLookBookSS/187.jpg','COSLookBookSS/188.jpg','COSLookBookSS/189.jpg','COSLookBookSS/190.jpg','COSLookBookSS/191.jpg','COSLookBookSS/192.jpg',
+                'COSLookBookSS/193.jpg','COSLookBookSS/194.jpg','COSLookBookSS/195.jpg','COSLookBookSS/196.jpg','COSLookBookSS/197.jpg','COSLookBookSS/198.jpg',
+                ],
+                'men': ['COSLookBookSS/145.jpg','COSLookBookSS/146.jpg','COSLookBookSS/147.jpg','COSLookBookSS/148.jpg',
+                'COSLookBookSS/151.jpg','COSLookBookSS/152.jpg','COSLookBookSS/153.jpg','COSLookBookSS/154.jpg','COSLookBookSS/155.jpg','COSLookBookSS/156.jpg','COSLookBookSS/157.jpg','COSLookBookSS/158.jpg','COSLookBookSS/159.jpg','COSLookBookSS/160.jpg',
+                'COSLookBookSS/161.jpg','COSLookBookSS/162.jpg','COSLookBookSS/163.jpg','COSLookBookSS/164.jpg','COSLookBookSS/165.jpg',
+                'COSLookBookSS/166.jpg','COSLookBookSS/167.jpg','COSLookBookSS/168.jpg','COSLookBookSS/169.jpg','COSLookBookSS/170.jpg','COSLookBookSS/171.jpg',
+                ]
+            },
+            'fw': {
+                'women': [ 'COSLookBookFW/214.jpg','COSLookBookFW/215.jpg','COSLookBookFW/216.jpg','COSLookBookFW/217.jpg','COSLookBookFW/218.jpg','COSLookBookFW/219.jpg','COSLookBookFW/220.jpg','COSLookBookFW/221.jpg',
+                'COSLookBookFW/222.jpg','COSLookBookFW/223.jpg','COSLookBookFW/224.jpg','COSLookBookFW/225.jpg','COSLookBookFW/226.jpg','COSLookBookFW/227.jpg','COSLookBookFW/228.jpg','COSLookBookFW/229.jpg','COSLookBookFW/230.jpg',
+                'COSLookBookFW/231.jpg','COSLookBookFW/232.jpg','COSLookBookFW/233.jpg','COSLookBookFW/234.jpg','COSLookBookFW/235.jpg','COSLookBookFW/236.jpg','COSLookBookFW/237.jpg','COSLookBookFW/238.jpg','COSLookBookFW/239.jpg',           
+                                ],
+
+                'men': ['COSLookBookFW/199.jpg','COSLookBookFW/200.jpg','COSLookBookFW/201.jpg','COSLookBookFW/202.jpg','COSLookBookFW/203.jpg','COSLookBookFW/204.jpg',
+                'COSLookBookFW/205.jpg','COSLookBookFW/206.jpg','COSLookBookFW/207.jpg','COSLookBookFW/208.jpg','COSLookBookFW/209.jpg','COSLookBookFW/210.jpg',
+                'COSLookBookFW/211.jpg','COSLookBookFW/212.jpg','COSLookBookFW/213.jpg',
+                
+                ]
+            },
+            'best': {
+                'women': [ 
+                'COSBestItem/240.jpg',
+                'COSBestItem/241.jpg',
+                'COSBestItem/242.jpg',
+                'COSBestItem/243.jpg',
+                ],
+                
+            }
+        };
+
+        function initSeason(season) {
+            currentSeason = season; 
+            const seasonTitle = document.querySelector('.season-button');
+            seasonTitle.textContent = season.toUpperCase(); 
+            const nav = document.getElementById('category-nav');
+            const womenLink = document.getElementById('women-link');
+            const menLink = document.getElementById('men-link');
+            nav.classList.remove('hidden'); 
+            if (season === 'best') {
+                womenLink.classList.add('hidden');
+                menLink.classList.add('hidden');
+            } else {
+                womenLink.classList.remove('hidden');
+                menLink.classList.remove('hidden');
+            }
+            showImages('women', season); 
+        }
+
+        function showImages(category, season) {
+            const container = document.getElementById('image-container');
+            container.innerHTML = ''; 
+            images[season][category].forEach(imgSrc => {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.position = 'relative';
+
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `${season} ${category} style`;
+                img.onclick = () => toggleFavorite(imgSrc, imgContainer);
+
+                const favoriteIcon = document.createElement('div');
+                favoriteIcon.classList.add('favorite-icon');
+                favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(favoriteIcon);
+                container.appendChild(imgContainer);
+            });
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector(`[onclick="showImages('${category}', '${season}')"]`).classList.add('active');
+        }
+
+        function toggleFavorite(imgSrc, imgContainer) {
+            const index = favorites.indexOf(imgSrc);
+            if (index === -1) {
+                favorites.push(imgSrc);
+                imgContainer.querySelector('.favorite-icon').innerHTML = '❤️';
+            } else {
+                favorites.splice(index, 1);
+                imgContainer.querySelector('.favorite-icon').innerHTML = '🤍';
+            }
+        }
+
+        function showFavorites() {
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            favorites.forEach(imgSrc => {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.position = 'relative';
+
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = 'Favorite style';
+                
+                const favoriteIcon = document.createElement('div');
+                favoriteIcon.classList.add('favorite-icon');
+                favoriteIcon.innerHTML = '❤️';
+
+                imgContainer.appendChild(img);
+                imgContainer.appendChild(favoriteIcon);
+                container.appendChild(imgContainer);
+            });
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        }
+
+        // Initial load
+        window.onload = () => initSeason(currentSeason);
+    </script>
+</body>
+</html>
