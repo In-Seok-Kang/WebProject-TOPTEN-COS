@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lookbook</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            font-size: 16px;
+        }
+        .flex {
+            display: flex;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .justify-center {
+            justify-content: center;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .space-x-4 {
+            gap: 10px;
+        }
+        .p-4 {
+            padding: 10px;
+        }
+        .border-b {
+            border-bottom: 1px solid black;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .text-lg {
+            font-size: 1.125rem;
+        }
+        .text-xl {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .nav-link {
+            cursor: pointer;
+            padding: 8px;
+        }
+        .nav-link.active {
+            border-bottom: 2px solid black;
+        }
+        .view-items-btn {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 8px 16px;
+            border-radius: 0.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .view-items-btn:hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
+        .relative, .absolute {
+            position: relative;
+        }
+        .absolute {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .my-4 {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+        .hidden {
+            display: none;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header class="flex justify-between items-center p-4 border-b">
+        <div class="flex items-center space-x-4">
+            <img src="image/COSlogo.png" alt="Logo" class="h-10">
+            <h1 class="text-2xl font-bold">Lookbook</h1>
+        </div>
+        <div class="dropdown">
+            <button class="text-lg season-button">S/S</button>
+            <div class="dropdown-content">
+                <a href="#" onclick="initSeason('ss')">S/S</a>
+                <a href="#" onclick="initSeason('fw')">F/W</a>
+                <a href="#" onclick="initSeason('best')">Best Item</a>
+            </div>
+        </div>
+    </header>
+    <main class="p-4">
+        <nav class="flex justify-center space-x-8 my-4" id="category-nav">
+            <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
+            <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
+        </nav>
+        <section id="image-container" class="grid grid-cols-4 gap-4">
+        </section>
+    </main>
+    <script>
+        let currentSeason = 'ss'; 
+        const images = {
+            'ss': {
+                'women': ['image/COSSSWomen1.jpg',
+                'image/COSSSWomen2.jpg',
+                'image/COSSSWomen3.jpg',
+                'image/COSSSWomen4.jpg',
+                'image/COSSSWomen5.jpg',
+                'image/COSSSWomen6.jpg',
+                'image/COSSSWomen7.jpg',
+                'image/COSSSWomen8.jpg',
+                'image/COSSSWomen9.jpg',
+                'image/COSSSWomen10.jpg',
+                'image/COSSSWomen11.jpg',
+                'image/COSSSWomen12.jpg',
+                'image/COSSSWomen13.jpg',
+                'image/COSSSWomen14.jpg',
+                'image/COSSSWomen15.jpg',
+                'image/COSSSWomen16.jpg',
+                'image/COSSSWomen17.jpg',
+                'image/COSSSWomen18.jpg',
+                'image/COSSSWomen19.jpg',
+                'image/COSSSWomen20.jpg',
+                'image/COSSSWomen21.jpg',
+                'image/COSSSWomen22.jpg',
+                'image/COSSSWomen23.jpg',
+                'image/COSSSWomen24.jpg',
+                'image/COSSSWomen25.jpg',
+                'image/COSSSWomen26.jpg',
+                'image/COSSSWomen27.jpg',
+                ],
+                'men': ['image/COSSSMen1.jpg',
+                'image/COSSSMen2.jpg',
+                'image/COSSSMen3.jpg',
+                'image/COSSSMen5.jpg',
+                'image/COSSSMen7.jpg',
+                'image/COSSSMen8.jpg',
+                'image/COSSSMen9.jpg',
+                'image/COSSSMen10.jpg',
+                'image/COSSSMen11.jpg',
+                'image/COSSSMen12.jpg',
+                'image/COSSSMen13.jpg',
+                'image/COSSSMen14.jpg',
+                'image/COSSSMen15.jpg',
+                'image/COSSSMen16.jpg',
+                'image/COSSSMen17.jpg',
+                'image/COSSSMen18.jpg',
+                'image/COSSSMen19.jpg',
+                'image/COSSSMen20.jpg',
+                'image/COSSSMen21.jpg',
+                'image/COSSSMen22.jpg',
+                'image/COSSSMen23.jpg',
+                'image/COSSSMen24.jpg',
+                'image/COSSSMen25.jpg',
+                'image/COSSSMen26.jpg',
+                'image/COSSSMen27.jpg',
+                ]
+            },
+            'fw': {
+                'women': [ 
+                'image/COSFWWomen1.jpg',
+                'image/COSFWWomen2.jpg',
+                'image/COSFWWomen3.jpg',
+                'image/COSFWWomen4.jpg',
+                'image/COSFWWomen5.jpg',
+                'image/COSFWWomen6.jpg',
+                'image/COSFWWomen7.jpg',
+                'image/COSFWWomen8.jpg',
+                'image/COSFWWomen9.jpg',
+                'image/COSFWWomen10.jpg',
+                'image/COSFWWomen11.jpg',
+                'image/COSFWWomen12.jpg',
+                'image/COSFWWomen13.jpg',
+                'image/COSFWWomen14.jpg',
+                'image/COSFWWomen15.jpg',
+                'image/COSFWWomen16.jpg',
+                'image/COSFWWomen17.jpg',
+                'image/COSFWWomen18.jpg',
+                'image/COSFWWomen19.jpg',
+                'image/COSFWWomen20.jpg',
+                'image/COSFWWomen21.jpg',
+                'image/COSFWWomen22.jpg',
+                'image/COSFWWomen23.jpg',
+                'image/COSFWWomen24.jpg',
+                'image/COSFWWomen25.jpg',
+                'image/COSFWWomen26.jpg',
+                ],
+                'men': ['image/COSFWMen1.jpg',
+                'image/COSFWMen2.jpg',
+                'image/COSFWMen3.jpg',
+                'image/COSFWMen5.jpg',
+                'image/COSFWMen6.jpg',
+                'image/COSFWMen7.jpg',
+                'image/COSFWMen8.jpg',
+                'image/COSFWMen9.jpg',
+                'image/COSFWMen10.jpg',
+                'image/COSFWMen11.jpg',
+                'image/COSFWMen12.jpg',
+                'image/COSFWMen13.jpg',
+                'image/COSFWMen14.jpg',
+                'image/COSFWMen15.jpg'
+                ]
+            },
+            'best': {
+                'women': [ 
+                'image/COSbestM.jpg',
+                'image/COSBestLook.jpg',
+                'image/COSbest3.jpg',
+                'image/COSbest4.jpg',
+                ],
+                
+            }
+        };
+
+        function initSeason(season) {
+            currentSeason = season; 
+            const seasonTitle = document.querySelector('.season-button');
+            seasonTitle.textContent = season.toUpperCase(); 
+            const nav = document.getElementById('category-nav');
+            const womenLink = document.getElementById('women-link');
+            const menLink = document.getElementById('men-link');
+            nav.classList.remove('hidden'); 
+            if (season === 'best') {
+                womenLink.classList.add('hidden');
+                menLink.classList.add('hidden');
+            } else {
+                womenLink.classList.remove('hidden');
+                menLink.classList.remove('hidden');
+            }
+            showImages('women', season); 
+        }
+
+        function showImages(category, season) {
+            const container = document.getElementById('image-container');
+            container.innerHTML = ''; 
+            images[season][category].forEach(imgSrc => {
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = `${season} ${category} style`;
+                container.appendChild(img);
+            });
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelector(`[onclick="showImages('${category}', '${season}')"]`).classList.add('active');
+        }
+
+        
+        window.onload = () => initSeason(currentSeason);
+    </script>
+</body>
+</html>
