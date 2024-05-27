@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lookbook</title>
+    <title>COS Lookbook</title>
     <style>
         * {
             box-sizing: border-box;
@@ -16,6 +17,9 @@
             color: black;
             margin: 0;
             font-size: 16px;
+            display: flex;
+            flex-direction: column; /* One True 레이아웃 구성 */
+            min-height: 100vh;
         }
         .flex {
             display: flex;
@@ -78,7 +82,7 @@
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, 1fr); /* 각 행에 4개의 사진 */
             gap: 16px;
         }
         .my-4 {
@@ -132,6 +136,7 @@
             cursor: pointer;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="flex justify-between items-center p-4 border-b">
@@ -149,14 +154,18 @@
             </div>
         </div>
     </header>
-    <main class="p-4">
+    <main class="p-4 flex-1"> <!-- One True 레이아웃 구성 -->
         <nav class="flex justify-center space-x-8 my-4" id="category-nav">
             <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
             <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
         </nav>
-        <section id="image-container" class="grid grid-cols-4 gap-4">
-        </section>
+        <section id="image-container" class="grid"></section>
     </main>
+    <footer class="footer flex justify-center items-center p-4 border-t">
+        <div class="container">
+            <p>&copy; 2024 COS Lookbook. All Rights Reserved.</p>
+        </div>
+    </footer>
     <script>
         let currentSeason = 'ss'; 
         let favorites = [];
@@ -166,114 +175,90 @@
                 'women': ['COSLookBookSS/172.jpg','COSLookBookSS/173.jpg','COSLookBookSS/174.jpg','COSLookBookSS/175.jpg','COSLookBookSS/176.jpg','COSLookBookSS/177.jpg',
                 'COSLookBookSS/178.jpg','COSLookBookSS/179.jpg','COSLookBookSS/180.jpg','COSLookBookSS/181.jpg','COSLookBookSS/182.jpg','COSLookBookSS/183.jpg','COSLookBookSS/184.jpg',
                 'COSLookBookSS/185.jpg','COSLookBookSS/186.jpg','COSLookBookSS/187.jpg','COSLookBookSS/188.jpg','COSLookBookSS/189.jpg','COSLookBookSS/190.jpg','COSLookBookSS/191.jpg','COSLookBookSS/192.jpg',
-                'COSLookBookSS/193.jpg','COSLookBookSS/194.jpg','COSLookBookSS/195.jpg','COSLookBookSS/196.jpg','COSLookBookSS/197.jpg','COSLookBookSS/198.jpg',
-                ],
+                'COSLookBookSS/193.jpg','COSLookBookSS/194.jpg','COSLookBookSS/195.jpg','COSLookBookSS/196.jpg','COSLookBookSS/197.jpg','COSLookBookSS/198.jpg'],
                 'men': ['COSLookBookSS/145.jpg','COSLookBookSS/146.jpg','COSLookBookSS/147.jpg','COSLookBookSS/148.jpg',
                 'COSLookBookSS/151.jpg','COSLookBookSS/152.jpg','COSLookBookSS/153.jpg','COSLookBookSS/154.jpg','COSLookBookSS/155.jpg','COSLookBookSS/156.jpg','COSLookBookSS/157.jpg','COSLookBookSS/158.jpg','COSLookBookSS/159.jpg','COSLookBookSS/160.jpg',
                 'COSLookBookSS/161.jpg','COSLookBookSS/162.jpg','COSLookBookSS/163.jpg','COSLookBookSS/164.jpg','COSLookBookSS/165.jpg',
-                'COSLookBookSS/166.jpg','COSLookBookSS/167.jpg','COSLookBookSS/168.jpg','COSLookBookSS/169.jpg','COSLookBookSS/170.jpg','COSLookBookSS/171.jpg',
-                ]
+                'COSLookBookSS/166.jpg','COSLookBookSS/167.jpg','COSLookBookSS/168.jpg','COSLookBookSS/169.jpg','COSLookBookSS/170.jpg','COSLookBookSS/171.jpg']
             },
             'fw': {
                 'women': [ 'COSLookBookFW/214.jpg','COSLookBookFW/215.jpg','COSLookBookFW/216.jpg','COSLookBookFW/217.jpg','COSLookBookFW/218.jpg','COSLookBookFW/219.jpg','COSLookBookFW/220.jpg','COSLookBookFW/221.jpg',
                 'COSLookBookFW/222.jpg','COSLookBookFW/223.jpg','COSLookBookFW/224.jpg','COSLookBookFW/225.jpg','COSLookBookFW/226.jpg','COSLookBookFW/227.jpg','COSLookBookFW/228.jpg','COSLookBookFW/229.jpg','COSLookBookFW/230.jpg',
-                'COSLookBookFW/231.jpg','COSLookBookFW/232.jpg','COSLookBookFW/233.jpg','COSLookBookFW/234.jpg','COSLookBookFW/235.jpg','COSLookBookFW/236.jpg','COSLookBookFW/237.jpg','COSLookBookFW/238.jpg','COSLookBookFW/239.jpg',           
-                                ],
-
+                'COSLookBookFW/231.jpg','COSLookBookFW/232.jpg','COSLookBookFW/233.jpg','COSLookBookFW/234.jpg','COSLookBookFW/235.jpg','COSLookBookFW/236.jpg','COSLookBookFW/237.jpg','COSLookBookFW/238.jpg','COSLookBookFW/239.jpg'],
                 'men': ['COSLookBookFW/199.jpg','COSLookBookFW/200.jpg','COSLookBookFW/201.jpg','COSLookBookFW/202.jpg','COSLookBookFW/203.jpg','COSLookBookFW/204.jpg',
-                'COSLookBookFW/205.jpg','COSLookBookFW/206.jpg','COSLookBookFW/207.jpg','COSLookBookFW/208.jpg','COSLookBookFW/209.jpg','COSLookBookFW/210.jpg',
-                'COSLookBookFW/211.jpg','COSLookBookFW/212.jpg','COSLookBookFW/213.jpg',
-                
-                ]
+                'COSLookBookFW/205.jpg','COSLookBookFW/206.jpg','COSLookBookFW/207.jpg','COSLookBookFW/208.jpg','COSLookBookFW/209.jpg','COSLookBookFW/210.jpg','COSLookBookFW/211.jpg','COSLookBookFW/212.jpg','COSLookBookFW/213.jpg']
             },
             'best': {
-                'women': [ 
-                'COSBestItem/240.jpg',
-                'COSBestItem/241.jpg',
-                'COSBestItem/242.jpg',
-                'COSBestItem/243.jpg',
-                ],
-                
+                'women': ['COSBest/108.jpg','COSBest/109.jpg','COSBest/110.jpg','COSBest/111.jpg','COSBest/112.jpg','COSBest/113.jpg','COSBest/114.jpg','COSBest/115.jpg','COSBest/116.jpg','COSBest/117.jpg','COSBest/118.jpg','COSBest/119.jpg',
+                'COSBest/120.jpg','COSBest/121.jpg','COSBest/122.jpg','COSBest/123.jpg','COSBest/124.jpg','COSBest/125.jpg','COSBest/126.jpg','COSBest/127.jpg','COSBest/128.jpg','COSBest/129.jpg','COSBest/130.jpg','COSBest/131.jpg','COSBest/132.jpg','COSBest/133.jpg',
+                'COSBest/134.jpg','COSBest/135.jpg','COSBest/136.jpg','COSBest/137.jpg','COSBest/138.jpg'],
+                'men': ['COSBest/100.jpg','COSBest/101.jpg','COSBest/102.jpg','COSBest/103.jpg','COSBest/104.jpg','COSBest/105.jpg','COSBest/106.jpg','COSBest/107.jpg']
             }
         };
 
         function initSeason(season) {
-            currentSeason = season; 
-            const seasonTitle = document.querySelector('.season-button');
-            seasonTitle.textContent = season.toUpperCase(); 
-            const nav = document.getElementById('category-nav');
-            const womenLink = document.getElementById('women-link');
-            const menLink = document.getElementById('men-link');
-            nav.classList.remove('hidden'); 
-            if (season === 'best') {
-                womenLink.classList.add('hidden');
-                menLink.classList.add('hidden');
+            currentSeason = season;
+            if (season === 'favorites') {
+                showFavorites();
             } else {
-                womenLink.classList.remove('hidden');
-                menLink.classList.remove('hidden');
+                showImages('women', currentSeason);
+                $('.season-button').text(season.toUpperCase());
             }
-            showImages('women', season); 
         }
 
         function showImages(category, season) {
-            const container = document.getElementById('image-container');
-            container.innerHTML = ''; 
+            const $container = $('#image-container');
+            $container.empty();
             images[season][category].forEach(imgSrc => {
-                const imgContainer = document.createElement('div');
-                imgContainer.style.position = 'relative';
+                const $imgContainer = $('<div>').css('position', 'relative');
 
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = `${season} ${category} style`;
-                img.onclick = () => toggleFavorite(imgSrc, imgContainer);
+                const $img = $('<img>').attr({
+                    src: imgSrc,
+                    alt: `${season} ${category} style`
+                }).click(() => toggleFavorite(imgSrc, $imgContainer[0]));
 
-                const favoriteIcon = document.createElement('div');
-                favoriteIcon.classList.add('favorite-icon');
-                favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
+                const $favoriteIcon = $('<div>').addClass('favorite-icon').html(favorites.includes(imgSrc) ? '❤️' : '🤍');
 
-                imgContainer.appendChild(img);
-                imgContainer.appendChild(favoriteIcon);
-                container.appendChild(imgContainer);
+                $imgContainer.append($img).append($favoriteIcon);
+                $container.append($imgContainer);
             });
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.querySelector(`[onclick="showImages('${category}', '${season}')"]`).classList.add('active');
+            $('.nav-link').removeClass('active');
+            $(`.nav-link[onclick="showImages('${category}', '${season}')"]`).addClass('active');
         }
 
         function toggleFavorite(imgSrc, imgContainer) {
             const index = favorites.indexOf(imgSrc);
             if (index === -1) {
                 favorites.push(imgSrc);
-                imgContainer.querySelector('.favorite-icon').innerHTML = '❤️';
+                $(imgContainer).find('.favorite-icon').html('❤️');
             } else {
                 favorites.splice(index, 1);
-                imgContainer.querySelector('.favorite-icon').innerHTML = '🤍';
+                $(imgContainer).find('.favorite-icon').html('🤍');
             }
         }
 
         function showFavorites() {
-            const container = document.getElementById('image-container');
-            container.innerHTML = '';
+            const $container = $('#image-container');
+            $container.empty();
             favorites.forEach(imgSrc => {
-                const imgContainer = document.createElement('div');
-                imgContainer.style.position = 'relative';
+                const $imgContainer = $('<div>').css('position', 'relative');
 
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = 'Favorite style';
-                
-                const favoriteIcon = document.createElement('div');
-                favoriteIcon.classList.add('favorite-icon');
-                favoriteIcon.innerHTML = '❤️';
+                const $img = $('<img>').attr({
+                    src: imgSrc,
+                    alt: `Favorite style`
+                }).click(() => toggleFavorite(imgSrc, $imgContainer[0]));
 
-                imgContainer.appendChild(img);
-                imgContainer.appendChild(favoriteIcon);
-                container.appendChild(imgContainer);
+                const $favoriteIcon = $('<div>').addClass('favorite-icon').html('❤️');
+
+                $imgContainer.append($img).append($favoriteIcon);
+                $container.append($imgContainer);
             });
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            $('.nav-link').removeClass('active');
         }
 
-        // Initial load
-        window.onload = () => initSeason(currentSeason);
+        $(document).ready(function() {
+            showImages('women', 'ss');
+        });
     </script>
 </body>
 </html>
