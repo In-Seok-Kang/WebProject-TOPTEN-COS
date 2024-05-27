@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -136,6 +137,7 @@
             height: 20px;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="flex justify-between items-center p-4 border-b">
@@ -159,7 +161,7 @@
             <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
             <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
         </nav>
-        <section id="image-container" class="grid grid-cols-4 gap-4"></section>
+        <section id="image-container" class="grid"></section>
     </main>
     <script>
         let currentSeason = 'ss';
@@ -167,8 +169,6 @@
 
         const images = {
             'ss': {
-                'Best Item': [],
-
                 'women': ['TOPTENLookBookSS/39.jpg','TOPTENLookBookSS/40.jpg','TOPTENLookBookSS/41.jpg','TOPTENLookBookSS/42.jpg','TOPTENLookBookSS/45.jpg','TOPTENLookBookSS/46.jpg','TOPTENLookBookSS/47.jpg','TOPTENLookBookSS/48.jpg',
                 'TOPTENLookBookSS/49.jpg','TOPTENLookBookSS/50.jpg','TOPTENLookBookSS/51.jpg','TOPTENLookBookSS/52.jpg','TOPTENLookBookSS/53.jpg','TOPTENLookBookSS/54.jpg','TOPTENLookBookSS/55.jpg','TOPTENLookBookSS/56.jpg','TOPTENLookBookSS/57.jpg','TOPTENLookBookSS/58.jpg',
                 'TOPTENLookBookSS/59.jpg','TOPTENLookBookSS/60.jpg','TOPTENLookBookSS/61.jpg','TOPTENLookBookSS/62.jpg','TOPTENLookBookSS/63.jpg','TOPTENLookBookSS/64.jpg','TOPTENLookBookSS/65.jpg','TOPTENLookBookSS/66.jpg','TOPTENLookBookSS/67.jpg','TOPTENLookBookSS/68.jpg',
@@ -215,64 +215,58 @@
         }
 
         function showImages(category, season) {
-            const container = document.getElementById('image-container');
-            container.innerHTML = '';
+            const $container = $('#image-container');
+            $container.empty();
             images[season][category].forEach(imgSrc => {
-                const imgContainer = document.createElement('div');
-                imgContainer.style.position = 'relative';
+                const $imgContainer = $('<div>').css('position', 'relative');
 
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = `${season} ${category} style`;
-                img.onclick = () => toggleFavorite(img, imgSrc);
+                const $img = $('<img>').attr({
+                    src: imgSrc,
+                    alt: `${season} ${category} style`
+                }).click(() => toggleFavorite($img[0], imgSrc));
 
-                const favoriteIcon = document.createElement('div');
-                favoriteIcon.classList.add('favorite-icon');
-                favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
+                const $favoriteIcon = $('<div>').addClass('favorite-icon').html(favorites.includes(imgSrc) ? '❤️' : '🤍');
 
-                imgContainer.appendChild(img);
-                imgContainer.appendChild(favoriteIcon);
-                container.appendChild(imgContainer);
+                $imgContainer.append($img).append($favoriteIcon);
+                $container.append($imgContainer);
             });
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            document.querySelector(`[onclick="showImages('${category}', '${season}')"]`).classList.add('active');
+            $('.nav-link').removeClass('active');
+            $(`.nav-link[onclick="showImages('${category}', '${season}')"]`).addClass('active');
         }
 
         function toggleFavorite(img, imgSrc) {
             const index = favorites.indexOf(imgSrc);
             if (index === -1) {
                 favorites.push(imgSrc);
-                img.nextElementSibling.innerHTML = '❤️';
+                $(img).next('.favorite-icon').html('❤️');
             } else {
                 favorites.splice(index, 1);
-                img.nextElementSibling.innerHTML = '🤍';
+                $(img).next('.favorite-icon').html('🤍');
             }
         }
 
         function showFavorites() {
-            const container = document.getElementById('image-container');
-            container.innerHTML = '';
+            const $container = $('#image-container');
+            $container.empty();
             favorites.forEach(imgSrc => {
-                const imgContainer = document.createElement('div');
-                imgContainer.style.position = 'relative';
+                const $imgContainer = $('<div>').css('position', 'relative');
 
-                const img = document.createElement('img');
-                img.src = imgSrc;
-                img.alt = 'Favorite style';
-                
-                const favoriteIcon = document.createElement('div');
-                favoriteIcon.classList.add('favorite-icon');
-                favoriteIcon.innerHTML = '❤️';
+                const $img = $('<img>').attr({
+                    src: imgSrc,
+                    alt: 'Favorite style'
+                }).click(() => toggleFavorite($img[0], imgSrc));
 
-                imgContainer.appendChild(img);
-                imgContainer.appendChild(favoriteIcon);
-                container.appendChild(imgContainer);
+                const $favoriteIcon = $('<div>').addClass('favorite-icon').html('❤️');
+
+                $imgContainer.append($img).append($favoriteIcon);
+                $container.append($imgContainer);
             });
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            $('.nav-link').removeClass('active');
         }
 
-        // Initial load
-        window.onload = () => initSeason(currentSeason);
+        $(document).ready(function() {
+            initSeason(currentSeason);
+        });
     </script>
 </body>
 </html>
