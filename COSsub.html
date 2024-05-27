@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +17,7 @@
             margin: 0;
             font-size: 16px;
             display: flex;
-            flex-direction: column; /* One True 레이아웃 구성 */
+            flex-direction: column; 
             min-height: 100vh;
         }
         .flex {
@@ -56,50 +55,39 @@
         .nav-link {
             cursor: pointer;
             padding: 8px;
+            position: relative;
         }
         .nav-link.active {
             border-bottom: 2px solid black;
         }
-        .view-items-btn {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 8px 16px;
-            border-radius: 0.25rem;
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .button {
+            background-color: #111;
+            color: white;
+            padding: 10px 20px;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border-radius: 12px;
+            border: none;
         }
-        .view-items-btn:hover {
-            background-color: rgba(255, 255, 255, 1);
-        }
-        .relative, .absolute {
-            position: relative;
-        }
-        .absolute {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 각 행에 4개의 사진 */
-            gap: 16px;
-        }
-        .my-4 {
-            margin-top: 16px;
-            margin-bottom: 16px;
-        }
-        .hidden {
-            display: none;
+        .button:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #111;
         }
         .dropdown {
-            position: relative;
             display: inline-block;
         }
         .dropdown-content {
             display: none;
             position: absolute;
-            right: 0;
             background-color: #f9f9f9;
             min-width: 160px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -114,8 +102,14 @@
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 16px;
+        }
+        .my-4 {
+            margin-top: 16px;
+            margin-bottom: 16px;
         }
         img {
             width: 100%;
@@ -136,7 +130,6 @@
             cursor: pointer;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="flex justify-between items-center p-4 border-b">
@@ -144,22 +137,24 @@
             <img src="image/COSlogo.png" alt="Logo" class="h-10">
             <h1 class="text-2xl font-bold">Lookbook</h1>
         </div>
-        <div class="dropdown">
-            <button class="text-lg season-button">S/S</button>
-            <div class="dropdown-content">
-                <a href="#" onclick="initSeason('ss')">S/S</a>
-                <a href="#" onclick="initSeason('fw')">F/W</a>
-                <a href="#" onclick="initSeason('best')">Best Item</a>
-                <a href="#" onclick="showFavorites()">Favorites</a>
+        <div class="flex items-center space-x-4">
+            <a href="https://example.com/favorites" class="button">Favorites</a>
+            <div class="dropdown">
+                <button class="button season-button">S/S</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="initSeason(event, 'ss')">S/S</a>
+                    <a href="#" onclick="initSeason(event, 'fw')">F/W</a>
+                    <a href="#" onclick="initSeason(event, 'best')">Best Item</a>
+                </div>
             </div>
         </div>
     </header>
-    <main class="p-4 flex-1"> <!-- One True 레이아웃 구성 -->
+    <main class="p-4 flex-1"> 
         <nav class="flex justify-center space-x-8 my-4" id="category-nav">
             <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
             <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
         </nav>
-        <section id="image-container" class="grid"></section>
+        <section id="image-container" class="grid my-4"></section>
     </main>
     <footer class="footer flex justify-center items-center p-4 border-t">
         <div class="container">
@@ -186,79 +181,111 @@
                 'COSLookBookFW/222.jpg','COSLookBookFW/223.jpg','COSLookBookFW/224.jpg','COSLookBookFW/225.jpg','COSLookBookFW/226.jpg','COSLookBookFW/227.jpg','COSLookBookFW/228.jpg','COSLookBookFW/229.jpg','COSLookBookFW/230.jpg',
                 'COSLookBookFW/231.jpg','COSLookBookFW/232.jpg','COSLookBookFW/233.jpg','COSLookBookFW/234.jpg','COSLookBookFW/235.jpg','COSLookBookFW/236.jpg','COSLookBookFW/237.jpg','COSLookBookFW/238.jpg','COSLookBookFW/239.jpg'],
                 'men': ['COSLookBookFW/199.jpg','COSLookBookFW/200.jpg','COSLookBookFW/201.jpg','COSLookBookFW/202.jpg','COSLookBookFW/203.jpg','COSLookBookFW/204.jpg',
-                'COSLookBookFW/205.jpg','COSLookBookFW/206.jpg','COSLookBookFW/207.jpg','COSLookBookFW/208.jpg','COSLookBookFW/209.jpg','COSLookBookFW/210.jpg','COSLookBookFW/211.jpg','COSLookBookFW/212.jpg','COSLookBookFW/213.jpg']
+                'COSLookBookFW/205.jpg','COSLookBookFW/206.jpg','COSLookBookFW/207.jpg','COSLookBookFW/208.jpg','COSLookBookFW/209.jpg','COSLookBookFW/210.jpg',
+                'COSLookBookFW/211.jpg','COSLookBookFW/212.jpg','COSLookBookFW/213.jpg']
             },
             'best': {
-                'women': ['COSBest/108.jpg','COSBest/109.jpg','COSBest/110.jpg','COSBest/111.jpg','COSBest/112.jpg','COSBest/113.jpg','COSBest/114.jpg','COSBest/115.jpg','COSBest/116.jpg','COSBest/117.jpg','COSBest/118.jpg','COSBest/119.jpg',
-                'COSBest/120.jpg','COSBest/121.jpg','COSBest/122.jpg','COSBest/123.jpg','COSBest/124.jpg','COSBest/125.jpg','COSBest/126.jpg','COSBest/127.jpg','COSBest/128.jpg','COSBest/129.jpg','COSBest/130.jpg','COSBest/131.jpg','COSBest/132.jpg','COSBest/133.jpg',
-                'COSBest/134.jpg','COSBest/135.jpg','COSBest/136.jpg','COSBest/137.jpg','COSBest/138.jpg'],
-                'men': ['COSBest/100.jpg','COSBest/101.jpg','COSBest/102.jpg','COSBest/103.jpg','COSBest/104.jpg','COSBest/105.jpg','COSBest/106.jpg','COSBest/107.jpg']
+                'women': [ 
+                'COSBestItem/240.jpg',
+                'COSBestItem/241.jpg',
+                'COSBestItem/242.jpg',
+                'COSBestItem/243.jpg']
             }
         };
 
-        function initSeason(season) {
+        function initSeason(event, season) {
+            event.preventDefault();
             currentSeason = season;
-            if (season === 'favorites') {
-                showFavorites();
-            } else {
-                showImages('women', currentSeason);
-                $('.season-button').text(season.toUpperCase());
-            }
+            const seasonButton = document.querySelector('.season-button');
+            seasonButton.textContent = season.toUpperCase();
+            showImages('women', currentSeason); 
+            updateNavLinks(); 
         }
 
         function showImages(category, season) {
-            const $container = $('#image-container');
-            $container.empty();
-            images[season][category].forEach(imgSrc => {
-                const $imgContainer = $('<div>').css('position', 'relative');
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            if (images[season] && images[season][category]) {
+                images[season][category].forEach(imgSrc => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.style.position = 'relative';
 
-                const $img = $('<img>').attr({
-                    src: imgSrc,
-                    alt: `${season} ${category} style`
-                }).click(() => toggleFavorite(imgSrc, $imgContainer[0]));
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = `${season} ${category} style`;
+                    img.onclick = () => toggleFavorite(imgSrc, imgContainer);
 
-                const $favoriteIcon = $('<div>').addClass('favorite-icon').html(favorites.includes(imgSrc) ? '❤️' : '🤍');
+                    const favoriteIcon = document.createElement('div');
+                    favoriteIcon.classList.add('favorite-icon');
+                    favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
 
-                $imgContainer.append($img).append($favoriteIcon);
-                $container.append($imgContainer);
-            });
-            $('.nav-link').removeClass('active');
-            $(`.nav-link[onclick="showImages('${category}', '${season}')"]`).addClass('active');
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(favoriteIcon);
+                    container.appendChild(imgContainer);
+                });
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                if (category === 'women') {
+                    document.getElementById('women-link').classList.add('active');
+                } else {
+                    document.getElementById('men-link').classList.add('active');
+                }
+            } else {
+                container.innerHTML = '<p>No images available.</p>';
+            }
         }
 
         function toggleFavorite(imgSrc, imgContainer) {
             const index = favorites.indexOf(imgSrc);
             if (index === -1) {
                 favorites.push(imgSrc);
-                $(imgContainer).find('.favorite-icon').html('❤️');
+                imgContainer.querySelector('.favorite-icon').innerHTML = '❤️';
             } else {
                 favorites.splice(index, 1);
-                $(imgContainer).find('.favorite-icon').html('🤍');
+                imgContainer.querySelector('.favorite-icon').innerHTML = '🤍';
             }
         }
 
         function showFavorites() {
-            const $container = $('#image-container');
-            $container.empty();
-            favorites.forEach(imgSrc => {
-                const $imgContainer = $('<div>').css('position', 'relative');
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            if (favorites.length > 0) {
+                favorites.forEach(imgSrc => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.style.position = 'relative';
 
-                const $img = $('<img>').attr({
-                    src: imgSrc,
-                    alt: `Favorite style`
-                }).click(() => toggleFavorite(imgSrc, $imgContainer[0]));
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = 'Favorite style';
+                    
+                    const favoriteIcon = document.createElement('div');
+                    favoriteIcon.classList.add('favorite-icon');
+                    favoriteIcon.innerHTML = '❤️';
 
-                const $favoriteIcon = $('<div>').addClass('favorite-icon').html('❤️');
-
-                $imgContainer.append($img).append($favoriteIcon);
-                $container.append($imgContainer);
-            });
-            $('.nav-link').removeClass('active');
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(favoriteIcon);
+                    container.appendChild(imgContainer);
+                });
+            } else {
+                container.innerHTML = '<p>No favorite images.</p>';
+            }
         }
 
-        $(document).ready(function() {
-            showImages('women', 'ss');
-        });
+        function updateNavLinks() {
+            const womenLink = document.getElementById('women-link');
+            const menLink = document.getElementById('men-link');
+            if (currentSeason === 'best') {
+                womenLink.style.display = 'none';
+                menLink.style.display = 'none';
+            } else {
+                womenLink.style.display = 'block';
+                menLink.style.display = 'block';
+            }
+        }
+
+        window.onload = () => {
+            showImages('women', currentSeason);
+            updateNavLinks();
+        };
     </script>
 </body>
 </html>
