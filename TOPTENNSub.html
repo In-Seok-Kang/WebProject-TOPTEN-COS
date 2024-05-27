@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +16,9 @@
             color: black;
             margin: 0;
             font-size: 16px;
+            display: flex;
+            flex-direction: column; 
+            min-height: 100vh;
         }
         .flex {
             display: flex;
@@ -57,16 +59,24 @@
         .nav-link.active {
             border-bottom: 2px solid black;
         }
-        .view-items-btn {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 8px 16px;
-            border-radius: 0.25rem;
+        .button {
+            background-color: #111;
+            color: white;
+            padding: 10px 20px;
             text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border-radius: 12px;
+            border: none;
         }
-        .view-items-btn:hover {
-            background-color: rgba(255, 255, 255, 1);
+        .button:hover {
+            background-color: white;
+            color: black;
+            border: 2px solid #111;
         }
         .relative, .absolute {
             position: relative;
@@ -137,7 +147,6 @@
             height: 20px;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <header class="flex justify-between items-center p-4 border-b">
@@ -145,23 +154,25 @@
             <img src="img/TOPTENlogo.jpg" alt="Logo" class="h-10">
             <h1 class="text-2xl font-bold">Lookbook</h1>
         </div>
-        <div class="dropdown">
-            <button class="text-lg season-button">S/S</button>
-            <div class="dropdown-content">
-                <a href="#" onclick="initSeason('ss')">S/S</a>
-                <a href="#" onclick="initSeason('fw')">F/W</a>
-                <a href="#" onclick="initSeason('best')">Best Item</a>
-                <a href="#" onclick="showFavorites()">Favorites</a>
+        <div class="flex items-center space-x-4">
+            <a href="https://example.com/favorites" class="button">Favorites</a>
+            <div class="dropdown">
+                <button class="button season-button">S/S</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="initSeason(event, 'ss')">S/S</a>
+                    <a href="#" onclick="initSeason(event, 'fw')">F/W</a>
+                    <a href="#" onclick="initSeason(event, 'best')">Best Item</a>
+                </div>
             </div>
         </div>
     </header>
-    <main class="p-4">
+    <main class="p-4 flex-1">
         <nav class="flex justify-center space-x-8 my-4" id="category-nav">
             <div class="nav-link text-lg hidden" id="all-link" onclick="showImages('all', currentSeason)">ALL</div>
             <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
             <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
         </nav>
-        <section id="image-container" class="grid"></section>
+        <section id="image-container" class="grid my-4"></section>
     </main>
     <script>
         let currentSeason = 'ss';
@@ -172,101 +183,119 @@
                 'women': ['TOPTENLookBookSS/39.jpg','TOPTENLookBookSS/40.jpg','TOPTENLookBookSS/41.jpg','TOPTENLookBookSS/42.jpg','TOPTENLookBookSS/45.jpg','TOPTENLookBookSS/46.jpg','TOPTENLookBookSS/47.jpg','TOPTENLookBookSS/48.jpg',
                 'TOPTENLookBookSS/49.jpg','TOPTENLookBookSS/50.jpg','TOPTENLookBookSS/51.jpg','TOPTENLookBookSS/52.jpg','TOPTENLookBookSS/53.jpg','TOPTENLookBookSS/54.jpg','TOPTENLookBookSS/55.jpg','TOPTENLookBookSS/56.jpg','TOPTENLookBookSS/57.jpg','TOPTENLookBookSS/58.jpg',
                 'TOPTENLookBookSS/59.jpg','TOPTENLookBookSS/60.jpg','TOPTENLookBookSS/61.jpg','TOPTENLookBookSS/62.jpg','TOPTENLookBookSS/63.jpg','TOPTENLookBookSS/64.jpg','TOPTENLookBookSS/65.jpg','TOPTENLookBookSS/66.jpg','TOPTENLookBookSS/67.jpg','TOPTENLookBookSS/68.jpg',
-                'TOPTENLookBookSS/69.jpg','TOPTENLookBookSS/70.jpg','TOPTENLookBookSS/71.jpg',
-                ],
-
+                'TOPTENLookBookSS/69.jpg','TOPTENLookBookSS/70.jpg','TOPTENLookBookSS/71.jpg'],
                 'men': ['TOPTENLookBookSS/1.jpg','TOPTENLookBookSS/2.jpg','TOPTENLookBookSS/3.jpg','TOPTENLookBookSS/4.jpg','TOPTENLookBookSS/5.jpg','TOPTENLookBookSS/6.jpg','TOPTENLookBookSS/7.jpg','TOPTENLookBookSS/8.jpg','TOPTENLookBookSS/9.jpg','TOPTENLookBookSS/10.jpg','TOPTENLookBookSS/11.jpg','TOPTENLookBookSS/12.jpg','TOPTENLookBookSS/13.jpg','TOPTENLookBookSS/14.jpg','TOPTENLookBookSS/15.jpg',
                 'TOPTENLookBookSS/16.jpg','TOPTENLookBookSS/17.jpg','TOPTENLookBookSS/18.jpg','TOPTENLookBookSS/19.jpg','TOPTENLookBookSS/20.jpg','TOPTENLookBookSS/21.jpg','TOPTENLookBookSS/22.jpg','TOPTENLookBookSS/23.jpg','TOPTENLookBookSS/24.jpg','TOPTENLookBookSS/25.jpg','TOPTENLookBookSS/26.jpg','TOPTENLookBookSS/27.jpg','TOPTENLookBookSS/28.jpg','TOPTENLookBookSS/29.jpg','TOPTENLookBookSS/30.jpg','TOPTENLookBookSS/31.jpg',
-                'TOPTENLookBookSS/32.jpg','TOPTENLookBookSS/33.jpg','TOPTENLookBookSS/34.jpg','TOPTENLookBookSS/35.jpg','TOPTENLookBookSS/36.jpg','TOPTENLookBookSS/37.jpg','TOPTENLookBookSS/38.jpg',
-                ]
+                'TOPTENLookBookSS/32.jpg','TOPTENLookBookSS/33.jpg','TOPTENLookBookSS/34.jpg','TOPTENLookBookSS/35.jpg','TOPTENLookBookSS/36.jpg','TOPTENLookBookSS/37.jpg','TOPTENLookBookSS/38.jpg']
             },
             'fw': {
-                'all': ['image/TOPTENFWMen1.jpg', 'image/TOPTENFWMen2.jpg', 'image/TOPTENFWMen3.jpg', 'image/TOPTENFWMen4.jpg', 'image/TOPTENFWMen5.jpg', 'image/TOPTENFWMen6.jpg', 'image/TOPTENFWMen7.jpg', 'image/TOPTENFWMen8.jpg', 'image/TOPTENFWMen9.jpg', 'image/TOPTENFWMen10.jpg', 'image/TOPTENFWMen11.jpg', 'image/TOPTENFWMen12.jpg', 'image/TOPTENFWMen13.jpg', 'image/TOPTENFWMen14.jpg', 'image/TOPTENFWMen15.jpg', 'image/TOPTENFWMen16.jpg', 'image/TOPTENFWMen17.jpg', 'image/TOPTENFWMen18.jpg', 'image/TOPTENFWMen19.jpg', 'image/TOPTENFWMen20.jpg', 'image/TOPTENFWMen21.jpg', 'image/TOPTENFWMen22.jpg', 'image/TOPTENFWMen23.jpg', 'image/TOPTENFWMen24.jpg', 'image/TOPTENFWMen25.jpg', 'image/TOPTENFWMen26.jpg', 'image/TOPTENFWMen27.jpg', 'image/TOPTENFWMen28.jpg', 'image/TOPTENFWMen29.jpg', 'image/TOPTENFWMen30.jpg', 'image/TOPTENFWMen31.jpg', 'image/TOPTENFWMen32.jpg', 'image/TOPTENFWMen33.jpg', 'image/TOPTENFWMen34.jpg'],
                 'women': ['TOPTENLookBookFW/108.jpg','TOPTENLookBookFW/109.jpg','TOPTENLookBookFW/110.jpg','TOPTENLookBookFW/111.jpg','TOPTENLookBookFW/112.jpg','TOPTENLookBookFW/113.jpg','TOPTENLookBookFW/114.jpg','TOPTENLookBookFW/115.jpg','TOPTENLookBookFW/116.jpg','TOPTENLookBookFW/117.jpg','TOPTENLookBookFW/118.jpg','TOPTENLookBookFW/119.jpg','TOPTENLookBookFW/120.jpg','TOPTENLookBookFW/121.jpg',
                 'TOPTENLookBookFW/122.jpg','TOPTENLookBookFW/123.jpg','TOPTENLookBookFW/124.jpg','TOPTENLookBookFW/125.jpg','TOPTENLookBookFW/126.jpg','TOPTENLookBookFW/127.jpg','TOPTENLookBookFW/128.jpg','TOPTENLookBookFW/129.jpg','TOPTENLookBookFW/130.jpg','TOPTENLookBookFW/131.jpg','TOPTENLookBookFW/132.jpg','TOPTENLookBookFW/133.jpg','TOPTENLookBookFW/134.jpg','TOPTENLookBookFW/135.jpg','TOPTENLookBookFW/136.jpg',
-                'TOPTENLookBookFW/137.jpg','TOPTENLookBookFW/138.jpg','TOPTENLookBookFW/139.jpg','TOPTENLookBookFW/140.jpg',
-                ],
-
-                'men': [  'TOPTENLookBookFW/72.jpg','TOPTENLookBookFW/73.jpg','TOPTENLookBookFW/74.jpg','TOPTENLookBookFW/75.jpg','TOPTENLookBookFW/76.jpg','TOPTENLookBookFW/77.jpg','TOPTENLookBookFW/78.jpg','TOPTENLookBookFW/79.jpg','TOPTENLookBookFW/80.jpg','TOPTENLookBookFW/81.jpg','TOPTENLookBookFW/82.jpg','TOPTENLookBookFW/83.jpg','TOPTENLookBookFW/84.jpg','TOPTENLookBookFW/85.jpg','TOPTENLookBookFW/86.jpg','TOPTENLookBookFW/87.jpg','TOPTENLookBookFW/88.jpg',
-                'TOPTENLookBookFW/89.jpg','TOPTENLookBookFW/90.jpg','TOPTENLookBookFW/91.jpg','TOPTENLookBookFW/92.jpg','TOPTENLookBookFW/93.jpg','TOPTENLookBookFW/94.jpg','TOPTENLookBookFW/95.jpg','TOPTENLookBookFW/96.jpg','TOPTENLookBookFW/97.jpg','TOPTENLookBookFW/98.jpg','TOPTENLookBookFW/99.jpg','TOPTENLookBookFW/100.jpg','TOPTENLookBookFW/101.jpg','TOPTENLookBookFW/102.jpg','TOPTENLookBookFW/103.jpg','TOPTENLookBookFW/104.jpg','TOPTENLookBookFW/105.jpg','TOPTENLookBookFW/106.jpg',
-                'TOPTENLookBookFW/107.jpg', ]
+                'TOPTENLookBookFW/137.jpg','TOPTENLookBookFW/138.jpg','TOPTENLookBookFW/139.jpg','TOPTENLookBookFW/140.jpg'],
+                'men': ['TOPTENLookBookFW/72.jpg','TOPTENLookBookFW/73.jpg','TOPTENLookBookFW/74.jpg','TOPTENLookBookFW/75.jpg','TOPTENLookBookFW/76.jpg','TOPTENLookBookFW/77.jpg','TOPTENLookBookFW/78.jpg','TOPTENLookBookFW/79.jpg','TOPTENLookBookFW/80.jpg','TOPTENLookBookFW/81.jpg','TOPTENLookBookFW/82.jpg','TOPTENLookBookFW/83.jpg','TOPTENLookBookFW/84.jpg','TOPTENLookBookFW/85.jpg','TOPTENLookBookFW/86.jpg','TOPTENLookBookFW/87.jpg',
+                'TOPTENLookBookFW/88.jpg','TOPTENLookBookFW/89.jpg','TOPTENLookBookFW/90.jpg','TOPTENLookBookFW/91.jpg','TOPTENLookBookFW/92.jpg','TOPTENLookBookFW/93.jpg','TOPTENLookBookFW/94.jpg','TOPTENLookBookFW/95.jpg','TOPTENLookBookFW/96.jpg','TOPTENLookBookFW/97.jpg','TOPTENLookBookFW/98.jpg','TOPTENLookBookFW/99.jpg','TOPTENLookBookFW/100.jpg','TOPTENLookBookFW/101.jpg','TOPTENLookBookFW/102.jpg','TOPTENLookBookFW/103.jpg',
+                'TOPTENLookBookFW/104.jpg','TOPTENLookBookFW/105.jpg','TOPTENLookBookFW/106.jpg','TOPTENLookBookFW/107.jpg']
             },
             'best': {
                 'women': ['TOPTENBestItem/141.jpg', 'TOPTENBestItem/142.jpg', 'TOPTENBestItem/143.jpg', 'TOPTENBestItem/144.jpg']
             }
         };
 
-        function initSeason(season) {
+        function initSeason(event, season) {
+            event.preventDefault();
             currentSeason = season;
-            const seasonTitle = document.querySelector('.season-button');
-            seasonTitle.textContent = season.toUpperCase();
-            const nav = document.getElementById('category-nav');
-            const womenLink = document.getElementById('women-link');
-            const menLink = document.getElementById('men-link');
-            nav.classList.remove('hidden');
-            if (season === 'best') {
-                womenLink.classList.add('hidden');
-                menLink.classList.add('hidden');
-            } else {
-                womenLink.classList.remove('hidden');
-                menLink.classList.remove('hidden');
-            }
-            showImages('women', season);
+            const seasonButton = document.querySelector('.season-button');
+            seasonButton.textContent = season.toUpperCase();
+            showImages('women', currentSeason); 
+            updateNavLinks(); 
         }
 
         function showImages(category, season) {
-            const $container = $('#image-container');
-            $container.empty();
-            images[season][category].forEach(imgSrc => {
-                const $imgContainer = $('<div>').css('position', 'relative');
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            if (images[season] && images[season][category]) {
+                images[season][category].forEach(imgSrc => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.style.position = 'relative';
 
-                const $img = $('<img>').attr({
-                    src: imgSrc,
-                    alt: `${season} ${category} style`
-                }).click(() => toggleFavorite($img[0], imgSrc));
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = `${season} ${category} style`;
+                    img.onclick = () => toggleFavorite(imgSrc, imgContainer);
 
-                const $favoriteIcon = $('<div>').addClass('favorite-icon').html(favorites.includes(imgSrc) ? '❤️' : '🤍');
+                    const favoriteIcon = document.createElement('div');
+                    favoriteIcon.classList.add('favorite-icon');
+                    favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
 
-                $imgContainer.append($img).append($favoriteIcon);
-                $container.append($imgContainer);
-            });
-            $('.nav-link').removeClass('active');
-            $(`.nav-link[onclick="showImages('${category}', '${season}')"]`).addClass('active');
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(favoriteIcon);
+                    container.appendChild(imgContainer);
+                });
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                if (category === 'women') {
+                    document.getElementById('women-link').classList.add('active');
+                } else {
+                    document.getElementById('men-link').classList.add('active');
+                }
+            } else {
+                container.innerHTML = '<p>No images available.</p>';
+            }
         }
 
-        function toggleFavorite(img, imgSrc) {
+        function toggleFavorite(imgSrc, imgContainer) {
             const index = favorites.indexOf(imgSrc);
             if (index === -1) {
                 favorites.push(imgSrc);
-                $(img).next('.favorite-icon').html('❤️');
+                imgContainer.querySelector('.favorite-icon').innerHTML = '❤️';
             } else {
                 favorites.splice(index, 1);
-                $(img).next('.favorite-icon').html('🤍');
+                imgContainer.querySelector('.favorite-icon').innerHTML = '🤍';
             }
         }
 
         function showFavorites() {
-            const $container = $('#image-container');
-            $container.empty();
-            favorites.forEach(imgSrc => {
-                const $imgContainer = $('<div>').css('position', 'relative');
+            const container = document.getElementById('image-container');
+            container.innerHTML = '';
+            if (favorites.length > 0) {
+                favorites.forEach(imgSrc => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.style.position = 'relative';
 
-                const $img = $('<img>').attr({
-                    src: imgSrc,
-                    alt: 'Favorite style'
-                }).click(() => toggleFavorite($img[0], imgSrc));
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = 'Favorite style';
+                    
+                    const favoriteIcon = document.createElement('div');
+                    favoriteIcon.classList.add('favorite-icon');
+                    favoriteIcon.innerHTML = '❤️';
 
-                const $favoriteIcon = $('<div>').addClass('favorite-icon').html('❤️');
-
-                $imgContainer.append($img).append($favoriteIcon);
-                $container.append($imgContainer);
-            });
-            $('.nav-link').removeClass('active');
+                    imgContainer.appendChild(img);
+                    imgContainer.appendChild(favoriteIcon);
+                    container.appendChild(imgContainer);
+                });
+            } else {
+                container.innerHTML = '<p>No favorite images.</p>';
+            }
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
         }
 
-        $(document).ready(function() {
-            initSeason(currentSeason);
-        });
+        function updateNavLinks() {
+            const womenLink = document.getElementById('women-link');
+            const menLink = document.getElementById('men-link');
+            if (currentSeason === 'best') {
+                womenLink.style.display = 'none';
+                menLink.style.display = 'none';
+            } else {
+                womenLink.style.display = 'block';
+                menLink.style.display = 'block';
+            }
+        }
+
+       
+        window.onload = () => {
+            showImages('women', currentSeason);
+            updateNavLinks();
+        };
     </script>
 </body>
 </html>
