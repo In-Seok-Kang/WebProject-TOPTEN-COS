@@ -1,301 +1,1332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lookbook</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: white;
-            color: black;
-            margin: 0;
-            font-size: 16px;
-            display: flex;
-            flex-direction: column; 
-            min-height: 100vh;
-        }
-        .flex {
-            display: flex;
-        }
-        .justify-between {
-            justify-content: space-between;
-        }
-        .justify-center {
-            justify-content: center;
-        }
-        .items-center {
-            align-items: center;
-        }
-        .space-x-4 {
-            gap: 10px;
-        }
-        .p-4 {
-            padding: 10px;
-        }
-        .border-b {
-            border-bottom: 1px solid black;
-        }
-        .text-2xl {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .text-lg {
-            font-size: 1.125rem;
-        }
-        .text-xl {
-            font-size: 1.25rem;
-            font-weight: bold;
-        }
-        .nav-link {
-            cursor: pointer;
-            padding: 8px;
-        }
-        .nav-link.active {
-            border-bottom: 2px solid black;
-        }
-        .button {
-            background-color: #111;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 12px;
-            border: none;
-        }
-        .button:hover {
-            background-color: white;
-            color: black;
-            border: 2px solid #111;
-        }
-        .relative, .absolute {
-            position: relative;
-        }
-        .absolute {
-            position: absolute;
-            bottom: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-        .my-4 {
-            margin-top: 16px;
-            margin-bottom: 16px;
-        }
-        .hidden {
-            display: none;
-        }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        img {
-            width: 100%;
-            height: auto;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        img:hover {
-            transform: scale(1.05);
-        }
-        .favorite-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            padding: 5px;
-            cursor: pointer;
-        }
-        .favorite-icon img {
-            width: 20px;
-            height: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOPTEN Lookbook</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: white;
+      color: black;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: white;
+      color: black;
+      padding: 1rem 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .header h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .navbar-toggler {
+      display: none;
+      background: none;
+      border: none;
+      color: black;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .header nav ul {
+      list-style: none;
+      display: flex;
+    }
+
+    .header nav ul li {
+      margin-left: 2rem;
+    }
+
+    .header nav ul li a {
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .header nav ul li a:hover {
+      color: #333;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: center;
+      background: white;
+      padding: 1rem 0;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu a {
+      color: black;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0 1.5rem;
+      padding-bottom: 0.5rem;
+      transition: color 0.3s ease, border-bottom 0.3s ease;
+    }
+
+    .menu a:hover {
+      color: #333;
+      border-bottom: 2px solid #333;
+    }
+
+    .section {
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      height: 300px;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-item-info {
+      opacity: 1;
+      transform: translateY(-20px);
+    }
+
+    .favorite-btn {
+      background: black;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .footer {
+      background: white;
+      color: black;
+      text-align: center;
+      padding: 1rem 0;
+      margin-top: 3rem;
+      box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+
+
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <header class="flex justify-between items-center p-4 border-b">
-        <div class="flex items-center space-x-4">
-            <img src="img/TOPTENlogo.jpg" alt="Logo" class="h-10">
-            <h1 class="text-2xl font-bold">Lookbook</h1>
+<header class="header">
+  <div class="container">
+    <h1 onclick="location.href='/cos'">TOPTEN Lookbook</h1>
+    <button class="navbar-toggler" id="menuButton">
+      &#9776;
+    </button>
+  </div>
+</header>
+<nav class="menu">
+  <a href="#men" onclick="showSection('men')">Men</a>
+  <a href="#women" onclick="showSection('women')">Women</a>
+  <th:block th:if="${username}">
+    <li><a href="/myPage">Welcome, <span th:text="${username}"></span></a></li>
+    <li><a href="/logout">Logout</a></li>
+  </th:block>
+</nav>
+<section id="men" class="section" style="display:none;">
+  <h2>Men's Collection</h2>
+  <div class="tabs">
+    <button onclick="showTab('men-ss', this)" class="active">S/S</button>
+    <button onclick="showTab('men-fw', this)">F/W</button>
+    <button onclick="showTab('men-best', this)">Best Items</button>
+  </div>
+  <div id="men-ss" class="tab-content">
+    <div class="gallery">
+      <!-- men S/S Images Here 예시 -->
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/1.jpg" alt="Men Look 1">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(1, 'men', 'TOPTEN', 'ss')">찜하기</button>
         </div>
-        <div class="flex items-center space-x-4">
-            <a href="https://example.com/favorites" class="button">Favorites</a>
-            <div class="dropdown">
-                <button class="button season-button">S/S</button>
-                <div class="dropdown-content">
-                    <a href="#" onclick="initSeason(event, 'ss')">S/S</a>
-                    <a href="#" onclick="initSeason(event, 'fw')">F/W</a>
-                    <a href="#" onclick="initSeason(event, 'best')">Best Item</a>
-                </div>
-            </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/2.jpg" alt="Men Look 2">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(2, 'men', 'TOPTEN', 'ss')">찜하기</button>
         </div>
-    </header>
-    <main class="p-4 flex-1">
-        <nav class="flex justify-center space-x-8 my-4" id="category-nav">
-            <div class="nav-link text-lg hidden" id="all-link" onclick="showImages('all', currentSeason)">ALL</div>
-            <div class="nav-link text-lg" id="women-link" onclick="showImages('women', currentSeason)">WOMEN</div>
-            <div class="nav-link text-lg" id="men-link" onclick="showImages('men', currentSeason)">MEN</div>
-        </nav>
-        <section id="image-container" class="grid my-4"></section>
-    </main>
-    <script>
-        let currentSeason = 'ss';
-        let favorites = [];
+      </div>
 
-        const images = {
-            'ss': {
-                'women': ['TOPTENLookBookSS/39.jpg','TOPTENLookBookSS/40.jpg','TOPTENLookBookSS/41.jpg','TOPTENLookBookSS/42.jpg','TOPTENLookBookSS/45.jpg','TOPTENLookBookSS/46.jpg','TOPTENLookBookSS/47.jpg','TOPTENLookBookSS/48.jpg',
-                'TOPTENLookBookSS/49.jpg','TOPTENLookBookSS/50.jpg','TOPTENLookBookSS/51.jpg','TOPTENLookBookSS/52.jpg','TOPTENLookBookSS/53.jpg','TOPTENLookBookSS/54.jpg','TOPTENLookBookSS/55.jpg','TOPTENLookBookSS/56.jpg','TOPTENLookBookSS/57.jpg','TOPTENLookBookSS/58.jpg',
-                'TOPTENLookBookSS/59.jpg','TOPTENLookBookSS/60.jpg','TOPTENLookBookSS/61.jpg','TOPTENLookBookSS/62.jpg','TOPTENLookBookSS/63.jpg','TOPTENLookBookSS/64.jpg','TOPTENLookBookSS/65.jpg','TOPTENLookBookSS/66.jpg','TOPTENLookBookSS/67.jpg','TOPTENLookBookSS/68.jpg',
-                'TOPTENLookBookSS/69.jpg','TOPTENLookBookSS/70.jpg','TOPTENLookBookSS/71.jpg'],
-                'men': ['TOPTENLookBookSS/1.jpg','TOPTENLookBookSS/2.jpg','TOPTENLookBookSS/3.jpg','TOPTENLookBookSS/4.jpg','TOPTENLookBookSS/5.jpg','TOPTENLookBookSS/6.jpg','TOPTENLookBookSS/7.jpg','TOPTENLookBookSS/8.jpg','TOPTENLookBookSS/9.jpg','TOPTENLookBookSS/10.jpg','TOPTENLookBookSS/11.jpg','TOPTENLookBookSS/12.jpg','TOPTENLookBookSS/13.jpg','TOPTENLookBookSS/14.jpg','TOPTENLookBookSS/15.jpg',
-                'TOPTENLookBookSS/16.jpg','TOPTENLookBookSS/17.jpg','TOPTENLookBookSS/18.jpg','TOPTENLookBookSS/19.jpg','TOPTENLookBookSS/20.jpg','TOPTENLookBookSS/21.jpg','TOPTENLookBookSS/22.jpg','TOPTENLookBookSS/23.jpg','TOPTENLookBookSS/24.jpg','TOPTENLookBookSS/25.jpg','TOPTENLookBookSS/26.jpg','TOPTENLookBookSS/27.jpg','TOPTENLookBookSS/28.jpg','TOPTENLookBookSS/29.jpg','TOPTENLookBookSS/30.jpg','TOPTENLookBookSS/31.jpg',
-                'TOPTENLookBookSS/32.jpg','TOPTENLookBookSS/33.jpg','TOPTENLookBookSS/34.jpg','TOPTENLookBookSS/35.jpg','TOPTENLookBookSS/36.jpg','TOPTENLookBookSS/37.jpg','TOPTENLookBookSS/38.jpg']
-            },
-            'fw': {
-                'women': ['TOPTENLookBookFW/108.jpg','TOPTENLookBookFW/109.jpg','TOPTENLookBookFW/110.jpg','TOPTENLookBookFW/111.jpg','TOPTENLookBookFW/112.jpg','TOPTENLookBookFW/113.jpg','TOPTENLookBookFW/114.jpg','TOPTENLookBookFW/115.jpg','TOPTENLookBookFW/116.jpg','TOPTENLookBookFW/117.jpg','TOPTENLookBookFW/118.jpg','TOPTENLookBookFW/119.jpg','TOPTENLookBookFW/120.jpg','TOPTENLookBookFW/121.jpg',
-                'TOPTENLookBookFW/122.jpg','TOPTENLookBookFW/123.jpg','TOPTENLookBookFW/124.jpg','TOPTENLookBookFW/125.jpg','TOPTENLookBookFW/126.jpg','TOPTENLookBookFW/127.jpg','TOPTENLookBookFW/128.jpg','TOPTENLookBookFW/129.jpg','TOPTENLookBookFW/130.jpg','TOPTENLookBookFW/131.jpg','TOPTENLookBookFW/132.jpg','TOPTENLookBookFW/133.jpg','TOPTENLookBookFW/134.jpg','TOPTENLookBookFW/135.jpg','TOPTENLookBookFW/136.jpg',
-                'TOPTENLookBookFW/137.jpg','TOPTENLookBookFW/138.jpg','TOPTENLookBookFW/139.jpg','TOPTENLookBookFW/140.jpg'],
-                'men': ['TOPTENLookBookFW/72.jpg','TOPTENLookBookFW/73.jpg','TOPTENLookBookFW/74.jpg','TOPTENLookBookFW/75.jpg','TOPTENLookBookFW/76.jpg','TOPTENLookBookFW/77.jpg','TOPTENLookBookFW/78.jpg','TOPTENLookBookFW/79.jpg','TOPTENLookBookFW/80.jpg','TOPTENLookBookFW/81.jpg','TOPTENLookBookFW/82.jpg','TOPTENLookBookFW/83.jpg','TOPTENLookBookFW/84.jpg','TOPTENLookBookFW/85.jpg','TOPTENLookBookFW/86.jpg','TOPTENLookBookFW/87.jpg',
-                'TOPTENLookBookFW/88.jpg','TOPTENLookBookFW/89.jpg','TOPTENLookBookFW/90.jpg','TOPTENLookBookFW/91.jpg','TOPTENLookBookFW/92.jpg','TOPTENLookBookFW/93.jpg','TOPTENLookBookFW/94.jpg','TOPTENLookBookFW/95.jpg','TOPTENLookBookFW/96.jpg','TOPTENLookBookFW/97.jpg','TOPTENLookBookFW/98.jpg','TOPTENLookBookFW/99.jpg','TOPTENLookBookFW/100.jpg','TOPTENLookBookFW/101.jpg','TOPTENLookBookFW/102.jpg','TOPTENLookBookFW/103.jpg',
-                'TOPTENLookBookFW/104.jpg','TOPTENLookBookFW/105.jpg','TOPTENLookBookFW/106.jpg','TOPTENLookBookFW/107.jpg']
-            },
-            'best': {
-                'women': ['TOPTENBestItem/141.jpg', 'TOPTENBestItem/142.jpg', 'TOPTENBestItem/143.jpg', 'TOPTENBestItem/144.jpg']
-            }
-        };
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/3.jpg" alt="Men Look 3">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(3, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
 
-        function initSeason(event, season) {
-            event.preventDefault();
-            currentSeason = season;
-            const seasonButton = document.querySelector('.season-button');
-            seasonButton.textContent = season.toUpperCase();
-            showImages('women', currentSeason); 
-            updateNavLinks(); 
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/4.jpg" alt="Men Look 4">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(4, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/5.jpg" alt="Men Look 5">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(5, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/6.jpg" alt="Men Look 6">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(6, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/7.jpg" alt="Men Look 7">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(7, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/8.jpg" alt="Men Look 8">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(8, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/9.jpg" alt="Men Look 9">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(9, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/10.jpg" alt="Men Look 10">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(10, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/11.jpg" alt="Men Look 11">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(11, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/12.jpg" alt="Men Look 12">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(12, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/13.jpg" alt="Men Look 13">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(13, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/14.jpg" alt="Men Look 14">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(14, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/15.jpg" alt="Men Look 15">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(15, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/16.jpg" alt="Men Look 16">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(16, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/17.jpg" alt="Men Look 17">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(17, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/18.jpg" alt="Men Look 18">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(18, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/19.jpg" alt="Men Look 19">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(19, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/20.jpg" alt="Men Look 20">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(20, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/21.jpg" alt="Men Look 21">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(21, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/22.jpg" alt="Men Look 22">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(22, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/23.jpg" alt="Men Look 23">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(23, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/24.jpg" alt="Men Look 24">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(24, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/25.jpg" alt="Men Look 25">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(25, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/26.jpg" alt="Men Look 26">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(26, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/27.jpg" alt="Men Look 27">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(27, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/28.jpg" alt="Men Look 28">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(28, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/29.jpg" alt="Men Look 29">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(29, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/30.jpg" alt="Men Look 30">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(30, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/31.jpg" alt="Men Look 31">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(31, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/32.jpg" alt="Men Look 32">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(32, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/33.jpg" alt="Men Look 33">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(33, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/34.jpg" alt="Men Look 34">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(34, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/35.jpg" alt="Men Look 35">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(35, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/36.jpg" alt="Men Look 36">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(36, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/37.jpg" alt="Men Look 37">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(37, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookSS/38.jpg" alt="Men Look 38">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(38, 'men', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+    </div>
+
+
+    </div>
+  </div>
+  <div id="men-fw" class="tab-content" style="display:none;">
+    <div class="gallery">
+      <!-- men F/W Images Here 예시-->
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/72.jpg" alt="Men Look 1">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(72, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/73.jpg" alt="Men Look 2">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(73, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/74.jpg" alt="Men Look 3">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(74, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/75.jpg" alt="Men Look 4">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(75, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/76.jpg" alt="Men Look 5">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(76, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/78.jpg" alt="Men Look 7">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(78, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/79.jpg" alt="Men Look 8">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(79, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/80.jpg" alt="Men Look 9">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(80, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/81.jpg" alt="Men Look 10">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(81, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/82.jpg" alt="Men Look 11">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(82, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/83.jpg" alt="Men Look 12">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(83, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/84.jpg" alt="Men Look 13">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(84, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/85.jpg" alt="Men Look 14">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(85, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/86.jpg" alt="Men Look 15">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(86, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/87.jpg" alt="Men Look 16">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(87, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/88.jpg" alt="Men Look 17">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(88, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/89.jpg" alt="Men Look 18">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(89, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/90.jpg" alt="Men Look 19">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(90, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/91.jpg" alt="Men Look 20">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(91, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/92.jpg" alt="Men Look 21">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(92, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/93.jpg" alt="Men Look 22">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(93, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/94.jpg" alt="Men Look 23">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(94, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/95.jpg" alt="Men Look 24">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(95, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/96.jpg" alt="Men Look 25">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(96, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/97.jpg" alt="Men Look 26">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(97, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/98.jpg" alt="Men Look 27">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(98, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/99.jpg" alt="Men Look 28">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(99, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/100.jpg" alt="Men Look 29">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(100, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/101.jpg" alt="Men Look 30">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(101, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/102.jpg" alt="Men Look 31">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(102, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/103.jpg" alt="Men Look 32">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(103, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/104.jpg" alt="Men Look 33">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(104, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/105.jpg" alt="Men Look 34">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(105, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/106.jpg" alt="Men Look 35">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(106, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+    
+    <div class="gallery-item">
+        <img src="TOPTENLookBookFW/107.jpg" alt="Men Look 36">
+        <div class="gallery-item-info">
+            <button class="favorite-btn" onclick="addFavorite(107, 'men', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+    </div>
+
+    </div>
+  </div>
+  <div id="men-best" class="tab-content" style="display:none;">
+    <div class="gallery">
+      <!-- men Best Items Images Here 예시-->
+      <div class="gallery-item">
+        <img src="TOPTENBestItem/142.jpg" alt="Men Look 1">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(142, 'men', 'TOPTEN', 'best')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENBestItem/144.jpg" alt="Men Look 2">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(144, 'men', 'TOPTEN', 'best')">찜하기</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<section id="women" class="section" style="display:none;">
+  <h2>Women's Collection</h2>
+  <div class="tabs">
+    <button onclick="showTab('women-ss', this)" class="active">S/S</button>
+    <button onclick="showTab('women-fw', this)">F/W</button>
+    <button onclick="showTab('women-best', this)">Best Items</button>
+  </div>
+  <div id="women-ss" class="tab-content">
+    <div class="gallery">
+
+      <!-- Women S/S Images Here 예시-->
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/39.jpg" alt="Women Look 1">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(39, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/40.jpg" alt="Women Look 2">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(40, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/41.jpg" alt="Women Look 3">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(41, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/42.jpg" alt="Women Look 4">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(42, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/45.jpg" alt="Women Look 7">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(45, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/46.jpg" alt="Women Look 8">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(46, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/47.jpg" alt="Women Look 9">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(47, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/48.jpg" alt="Women Look 10">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(48, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/49.jpg" alt="Women Look 11">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(49, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/50.jpg" alt="Women Look 12">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(50, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/51.jpg" alt="Women Look 13">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(51, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/52.jpg" alt="Women Look 14">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(52, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/53.jpg" alt="Women Look 15">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(53, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/54.jpg" alt="Women Look 16">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(54, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/55.jpg" alt="Women Look 17">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(55, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/56.jpg" alt="Women Look 18">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(56, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/57.jpg" alt="Women Look 19">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(57, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/58.jpg" alt="Women Look 20">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(39, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/59.jpg" alt="Women Look 21">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(59, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/60.jpg" alt="Women Look 22">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(60, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/61.jpg" alt="Women Look 23">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(61, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/62.jpg" alt="Women Look 24">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(62, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/63.jpg" alt="Women Look 25">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(63, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/64.jpg" alt="Women Look 26">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(64, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/65.jpg" alt="Women Look 27">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(65, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/66.jpg" alt="Women Look 28">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(66, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/67.jpg" alt="Women Look 29">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(60, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/68.jpg" alt="Women Look 30">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(68, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/69.jpg" alt="Women Look 31">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(69, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/70.jpg" alt="Women Look 32">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(60, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookSS/71.jpg" alt="Women Look 33">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(60, 'women', 'TOPTEN', 'ss')">찜하기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="women-fw" class="tab-content" style="display:none;">
+    <div class="gallery">
+      <!-- Women F/W Images Here 예시-->
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/108.jpg" alt="Women Look 1">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(108, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/109.jpg" alt="Women Look 2">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(109, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/110.jpg" alt="Women Look 3">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(110, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/111.jpg" alt="Women Look 4">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(111, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/112.jpg" alt="Women Look 5">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(108, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/113.jpg" alt="Women Look 6">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(113, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/114.jpg" alt="Women Look 7">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(114, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/115.jpg" alt="Women Look 8">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(115, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/116.jpg" alt="Women Look 9">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(116, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/117.jpg" alt="Women Look 10">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(117, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/118.jpg" alt="Women Look 11">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(118, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/119.jpg" alt="Women Look 12">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(119, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/120.jpg" alt="Women Look 13">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(120, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/121.jpg" alt="Women Look 14">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(121, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/122.jpg" alt="Women Look 15">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(122, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/123.jpg" alt="Women Look 16">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(123, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/124.jpg" alt="Women Look 17">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(124, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/125.jpg" alt="Women Look 18">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(125, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/126.jpg" alt="Women Look 19">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(126, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/127.jpg" alt="Women Look 20">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(127, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/128.jpg" alt="Women Look 21">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(128, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/129.jpg" alt="Women Look 22">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(129, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/130.jpg" alt="Women Look 23">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(130, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/131.jpg" alt="Women Look 24">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(131, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/132.jpg" alt="Women Look 25">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(132, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/133.jpg" alt="Women Look 26">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(133, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/134.jpg" alt="Women Look 27">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(134, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/135.jpg" alt="Women Look 28">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(135, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/136.jpg" alt="Women Look 29">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(136, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/137.jpg" alt="Women Look 30">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(137, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/138.jpg" alt="Women Look 31">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(138, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/139.jpg" alt="Women Look 32">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(139, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENLookBookFW/140.jpg" alt="Women Look 33">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(140, 'women', 'TOPTEN', 'fw')">찜하기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="women-best" class="tab-content" style="display:none;">
+    <div class="gallery">
+
+      <!-- Women Best Items Images Here 예시-->
+      <div class="gallery-item">
+        <img src="TOPTENBestItem/141.jpg" alt="Women Look 1">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(141, 'women', 'TOPTEN', 'best')">찜하기</button>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <img src="TOPTENBestItem/143.jpg" alt="Women Look 2">
+        <div class="gallery-item-info">
+          <button class="favorite-btn" onclick="addFavorite(143, 'women', 'TOPTEN', 'best')">찜하기</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2024 TOPTen Lookbook. All Rights Reserved.</p>
+  </div>
+</footer>
+<script>
+  let currentUser = null;
+
+  function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+      section.style.display = 'none';
+    });
+    document.getElementById(sectionId).style.display = 'block';
+  }
+
+  function showTab(tabId, element) {
+    document.querySelectorAll('.tab-content').forEach(tab => {
+      tab.style.display = 'none';
+    });
+    document.querySelectorAll('.tabs button').forEach(button => {
+      button.classList.remove('active');
+    });
+    document.getElementById(tabId).style.display = 'block';
+    element.classList.add('active');
+  }
+
+  function addFavorite(photoId, gender, brand, tab) {
+    if (!currentUser) {
+      alert('Please log in to add favorites.');
+      return;
+    }
+
+    const memberId = currentUser.id;
+    fetch(`/favorites/add?memberId=${memberId}&photoId=${photoId}&gender=${gender}&brand=${brand}&tab=${tab}`, {
+      method: 'POST'
+    })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+              }
+              return response.text();
+            })
+            .then(data => {
+              alert(data);
+              console.log('Favorite added successfully:', data);
+            })
+            .catch(error => console.error('Error:', error));
+  }
+
+  function getCurrentUser() {
+    fetch('/current-user')
+            .then(response => response.json())
+            .then(user => {
+              currentUser = user;
+            })
+            .catch(error => console.error('Error:', error));
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    getCurrentUser();
+    document.querySelectorAll('.tabs button')[0].click();
+
+    const menuButton = document.querySelector('#menuButton');
+    const closeButton = document.querySelector('#closeButton');
+    const slideMenu = document.querySelector('#slideMenu');
+
+    if(menuButton) {
+      menuButton.addEventListener('click', function() {
+        slideMenu.classList.toggle('show');
+        menuButton.style.display = 'none';
+      });
+    }
+
+    if(closeButton) {
+      closeButton.addEventListener('click', function() {
+        slideMenu.classList.toggle('show');
+        menuButton.style.display = 'block';
+      });
+    }
+
+    document.querySelectorAll('.nav-link, .slide-menu a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({
+            behavior: 'smooth'
+          });
+          slideMenu.classList.remove('show');
+          menuButton.style.display = 'block';
         }
-
-        function showImages(category, season) {
-            const container = document.getElementById('image-container');
-            container.innerHTML = '';
-            if (images[season] && images[season][category]) {
-                images[season][category].forEach(imgSrc => {
-                    const imgContainer = document.createElement('div');
-                    imgContainer.style.position = 'relative';
-
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.alt = `${season} ${category} style`;
-                    img.onclick = () => toggleFavorite(imgSrc, imgContainer);
-
-                    const favoriteIcon = document.createElement('div');
-                    favoriteIcon.classList.add('favorite-icon');
-                    favoriteIcon.innerHTML = favorites.includes(imgSrc) ? '❤️' : '🤍';
-
-                    imgContainer.appendChild(img);
-                    imgContainer.appendChild(favoriteIcon);
-                    container.appendChild(imgContainer);
-                });
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                if (category === 'women') {
-                    document.getElementById('women-link').classList.add('active');
-                } else {
-                    document.getElementById('men-link').classList.add('active');
-                }
-            } else {
-                container.innerHTML = '<p>No images available.</p>';
-            }
-        }
-
-        function toggleFavorite(imgSrc, imgContainer) {
-            const index = favorites.indexOf(imgSrc);
-            if (index === -1) {
-                favorites.push(imgSrc);
-                imgContainer.querySelector('.favorite-icon').innerHTML = '❤️';
-            } else {
-                favorites.splice(index, 1);
-                imgContainer.querySelector('.favorite-icon').innerHTML = '🤍';
-            }
-        }
-
-        function showFavorites() {
-            const container = document.getElementById('image-container');
-            container.innerHTML = '';
-            if (favorites.length > 0) {
-                favorites.forEach(imgSrc => {
-                    const imgContainer = document.createElement('div');
-                    imgContainer.style.position = 'relative';
-
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.alt = 'Favorite style';
-                    
-                    const favoriteIcon = document.createElement('div');
-                    favoriteIcon.classList.add('favorite-icon');
-                    favoriteIcon.innerHTML = '❤️';
-
-                    imgContainer.appendChild(img);
-                    imgContainer.appendChild(favoriteIcon);
-                    container.appendChild(imgContainer);
-                });
-            } else {
-                container.innerHTML = '<p>No favorite images.</p>';
-            }
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-        }
-
-        function updateNavLinks() {
-            const womenLink = document.getElementById('women-link');
-            const menLink = document.getElementById('men-link');
-            if (currentSeason === 'best') {
-                womenLink.style.display = 'none';
-                menLink.style.display = 'none';
-            } else {
-                womenLink.style.display = 'block';
-                menLink.style.display = 'block';
-            }
-        }
-
-       
-        window.onload = () => {
-            showImages('women', currentSeason);
-            updateNavLinks();
-        };
-    </script>
+      });
+    });
+  });
+</script>
 </body>
 </html>
